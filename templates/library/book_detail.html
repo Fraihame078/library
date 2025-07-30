@@ -32,7 +32,7 @@
         {% endif %}
         {% if book.is_vip %}
           <p><strong>VIP книга</strong></p>
-          <p><strong>Цена:</strong> {{ book.price }} ₽</p>
+          <p><strong>Цена:</strong> {{ book.price }} $</p>
           {% if user.is_authenticated %}
             {% if user_has_purchased %}
               <span class="text-success">Вы уже приобрели эту книгу.</span>

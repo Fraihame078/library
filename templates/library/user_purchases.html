@@ -19,7 +19,7 @@
             {% for pur in purchases %}
               <tr>
                 <td>{{ pur.book.title }}</td>
-                <td>{{ pur.price }} ₽</td>
+                <td>{{ pur.price }} $</td>
                 <td>{{ pur.purchased_at|date:'d.m.Y H:i' }}</td>
               </tr>
             {% endfor %}

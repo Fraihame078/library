@@ -46,7 +46,7 @@
               <p class="card-text mb-1"><strong>Автор:</strong> {{ book.author }}</p>
               {% if book.is_vip %}
                 <span class="badge bg-warning text-dark mb-2">VIP</span>
-                <p class="card-text mb-1"><strong>Цена:</strong> {{ book.price }} ₽</p>
+                <p class="card-text mb-1"><strong>Цена:</strong> {{ book.price }} $</p>
               {% else %}
                 <p class="card-text mb-1"><small class="text-muted">Доступно: {{ book.available_copies }}</small></p>
               {% endif %}
