@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Главная | Библиотека{% endblock %}
+
+{% block content %}
+  <!-- Hero section -->
+  <section
+    class="hero-section text-center text-white d-flex align-items-center"
+    style="background-image: url('{% static "images/hero.png" %}'); background-size: cover; background-position: center; height: 300px;"
+  >
+    <div class="container py-5">
+      <h1 class="display-4 fw-bold">Добро пожаловать в нашу библиотеку</h1>
+      <p class="lead">Исследуйте мир знаний и находите свои любимые книги</p>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="btn btn-light btn-lg me-2">Регистрация</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">Войти</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Books grid -->
+  <div class="container py-5">
+    <h2 class="mb-4 text-center">Каталог книг</h2>
+    <div class="row">
+      {% for book in books %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm w-100">
+            {% if book.cover_image %}
+              <img
+                src="{{ book.cover_image.url }}"
+                class="card-img-top"
+                alt="{{ book.title }}"
+                style="height: 200px; object-fit: cover;"
+              />
+            {% else %}
+              <div
+                class="d-flex align-items-center justify-content-center bg-light"
+                style="height: 200px;"
+              >
+                <span class="display-4 text-muted">{{ book.title|slice:":1" }}</span>
+              </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text mb-1"><strong>Автор:</strong> {{ book.author }}</p>
+              {% if book.is_vip %}
+                <span class="badge bg-warning text-dark mb-2">VIP</span>
+                <p class="card-text mb-1"><strong>Цена:</strong> {{ book.price }} ₽</p>
+              {% else %}
+                <p class="card-text mb-1"><small class="text-muted">Доступно: {{ book.available_copies }}</small></p>
+              {% endif %}
+              <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary mt-auto">Подробнее</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>Книг пока нет.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

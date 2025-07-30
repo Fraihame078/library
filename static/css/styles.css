@@ -1,0 +1,46 @@
+/* Custom styles for the library website */
+
+/* Hero section overlay for better text contrast */
+.hero-section {
+  position: relative;
+  color: #fff;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Book card adjustments */
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.card .btn {
+  width: 100%;
+}
+
+/* Placeholder box for books without cover */
+.placeholder-image {
+  background-color: #f1f1f1;
+  color: #999;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* Navbar spacing for better look on small screens */
+@media (max-width: 576px) {
+  .navbar-nav .nav-link {
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+}

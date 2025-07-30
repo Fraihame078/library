@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои бронирования | Библиотека{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <h2 class="mb-4">Мои бронирования</h2>
+    {% if reservations %}
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Книга</th>
+              <th>Дата бронирования</th>
+              <th>Статус</th>
+              <th>Дата возврата</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for res in reservations %}
+              <tr>
+                <td>{{ res.book.title }}</td>
+                <td>{{ res.reserved_at|date:'d.m.Y H:i' }}</td>
+                <td>{{ res.get_status_display }}</td>
+                <td>
+                  {% if res.return_date %}
+                    {{ res.return_date|date:'d.m.Y' }}
+                  {% else %}
+                    —
+                  {% endif %}
+                </td>
+                <td>
+                  {% if res.status == 'reserved' %}
+                    <a
+                      href="{% url 'return_book' res.id %}"
+                      class="btn btn-sm btn-success"
+                    >Вернуть</a>
+                    <a
+                      href="{% url 'cancel_reservation' res.id %}"
+                      class="btn btn-sm btn-danger"
+                    >Отменить</a>
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>Вы ещё не бронировали книги.</p>
+    {% endif %}
+  </div>
+{% endblock %}

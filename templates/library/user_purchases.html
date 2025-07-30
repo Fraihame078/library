@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои покупки | Библиотека{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <h2 class="mb-4">Мои покупки</h2>
+    {% if purchases %}
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Книга</th>
+              <th>Цена</th>
+              <th>Дата покупки</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pur in purchases %}
+              <tr>
+                <td>{{ pur.book.title }}</td>
+                <td>{{ pur.price }} ₽</td>
+                <td>{{ pur.purchased_at|date:'d.m.Y H:i' }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>Вы ещё не приобретали книги из VIP‑раздела.</p>
+    {% endif %}
+  </div>
+{% endblock %}
